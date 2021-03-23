@@ -1,0 +1,42 @@
+<html>
+<head>
+	<script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/TYDIjJAqCk6g335bFk3AjlC3/recaptcha__en.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6Le5LnAaAAAAAEk2YEtdy82eq9mUz_qgwcZ7GRa7"></script>
+	<script>
+        function redirect(token) {
+            window.location.replace("http://localhost:5000/send?token="+token);
+        }
+
+		grecaptcha.ready(function() {
+		// do request for recaptcha token
+		// response is promise with passed token
+			grecaptcha.execute('6Le5LnAaAAAAAEk2YEtdy82eq9mUz_qgwcZ7GRa7', {action:'validate_captcha'})
+					  .then(function(token) {
+				// add token value to form
+				console.log(token);
+				// document.getElementById('g-recaptcha-response').value = token;
+				// var url_string = window.location.href;
+				document.querySelector(".token-container").innerHTML = token;
+                
+				// var url = new URL(token);
+				// var paramValue1 = url.searchParams.get("accountName");
+				// var account = document.getElementById("accName");
+				// account.value = paramValue1;
+				// var paramValue2 = url.searchParams.get("username");
+				// var uname = document.getElementById("uName");
+				// uname.value = paramValue2;
+				var frm = document.getElementById("form_id");
+				frm.submit();
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="token-container"></div>
+
+    <!-- <form id="form_id" method="GET" action="/token">
+		<input type="hidden" id="g-recaptcha-response" name="captcha">
+		<input type="submit" value="Submit">
+	</form> -->
+</body>
+</html>
